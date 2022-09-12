@@ -7,20 +7,19 @@ import Foundation
 
 func solution(_ s: String) -> Bool
 {
-    var stack: [String] = []
-    let array = Array(s)
+    var count = 0
 
-    for (index, br) in Array(s).enumerated() {
-        if stack.isEmpty {
-            stack.append(String(br))
-        } else {
-            if stack.last! == "(" && br == ")" {
-                stack.removeLast()
-            } else {
-                stack.append(String(br))
-            }
+    for br in s {
+        if br == "(" {
+            count += 1
+        } else if br == ")" {
+            count -= 1
+        } 
+        
+        if count < 0 {
+            return false
         }
     }
 
-    return stack.isEmpty
+    return count == 0
 }
