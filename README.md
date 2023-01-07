@@ -20,7 +20,7 @@
 |Data Structure|Search|Append/Insert|Remove|
 |:--|:--|:--|:--|
 |Array||
-|Linked List||
+|[Linked List](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/18)||
 |[Stack](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/17)||
 |Queue||
 |HashTable||
