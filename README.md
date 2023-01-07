@@ -17,11 +17,11 @@
 
 ## Data Structure
 
-|Data Structure|Search|Append/Insert|Remove|
+|Data Structure|Search|Insert|Remove|
 |:--|:--|:--|:--|
 |Array||
-|[Linked List](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/18)||
-|[Stack](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/17)||
+|[Linked List](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/18)|특정 노드 탐색 시 O(N)의 시간 복잡도|O(1)|O(1)|
+|[Stack](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/17)|마지막 노드를 탐색하는 것이라고 한다면 O(1) -> peek operation|O(1)|O(1)|
 |Queue||
 |HashTable||
 |Graph||
