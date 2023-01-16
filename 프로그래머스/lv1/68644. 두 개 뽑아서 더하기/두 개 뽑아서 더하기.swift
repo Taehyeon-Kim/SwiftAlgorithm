@@ -8,5 +8,5 @@ func solution(_ numbers:[Int]) -> [Int] {
             else { sets.insert(numbers[i] + numbers[j]) }
         }
     }
-    return Array(sets).sorted()
+    return sets.sorted()
 }
