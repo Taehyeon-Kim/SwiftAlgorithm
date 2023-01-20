@@ -8,3 +8,9 @@ func solution(_ a:Int, _ b:Int) -> Int64 {
     
     return Int64(answer)
 }
+
+/*
+func solution(_ a:Int, _ b:Int) -> Int64 {    
+    return Int64((a < b ? (a...b) : (b...a)).map { $0 }.reduce(0, +))
+}
+*/
