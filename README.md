@@ -15,12 +15,37 @@
 
 ## Algorithm
 - Brute Force
+- Backtracking
+- Greedy
 - BFS/DFS
 - Dynamic Programming
 - Floyd Warshall
 - Dijkstra
 - Sliding Window
 - Two Pointers
+
+## Math
+- GCD, LCM
+- 소수
+- 약수
+- 고급 연산(AND, OR, XOR, NOR, Shifting)
+- 순열, 조합, 중복 순열, 중복 조합
+
+## String
+- String.Index
+- String to array
+- String repeating - init(repeating:count:)
+- Character
+- ASCII
+
+## High ordered functions
+- forEach
+- map
+- filter
+- reduce
+- flatMap
+- compactMap
+- etc.(for-in, closure)
 
 ## Weekly
 |WEEK|DURATION|LISTs|MEMO|
