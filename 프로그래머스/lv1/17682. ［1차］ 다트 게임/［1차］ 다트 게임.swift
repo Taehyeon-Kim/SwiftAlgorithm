@@ -1,30 +1,6 @@
-// 제곱 S, D, T
-// *(2배) : 중첩가능
-// #(마이너스) : *와 중첩 시 -2배
-
-// 각 기호에 따른 점수를 정확하게 계산할 수 있는가
-// S : 1제곱
-// D : 2제곱
-// T : 3제곱
-// * : 이전 점수 o - 이전 점수, 현재 점수 각각 2배 / 이전 점수 x - 현재 점수만 2배
-
-// # : -1, * : x2
-// **: 중첩 가능 ex. ** - 4배
-// *#: 중첩 가능 ex. ** - -2배
-
-// 3번의 기회 -> 3개씩 끊으면 될 것 같음 -> |점수|보너스|[옵션]
-// 점수 : 0 ~ 10
-// 보너스 : S, D, T
-// 옵션 : *, # 중 하나 or 없음
-
-// split이 관건 - 어떻게 끊을까?
-// 다음 숫자가 나오기전까지 끊어야 하나
-
-// 다음 숫자 나오면 계산 후, 초기화
-
 import Foundation
 
-@frozen
+// 보너스 계산 위한 열거형
 enum Bonus: String {
     case single = "S"
     case double = "D"
@@ -39,6 +15,7 @@ enum Bonus: String {
     }
 }
 
+// 계산 기능
 func cal(_ score: Int, _ bonus: String) -> Int {
     let bonus = Bonus(rawValue: bonus)!
     var score: Int {
@@ -47,50 +24,37 @@ func cal(_ score: Int, _ bonus: String) -> Int {
     return score
 }
 
-func totalScore(_ scores: [Int], _ optionQueue: [Int]) -> Int {
-    var options = optionQueue
-    
-    for (i, op) in optionQueue.enumerated() {
-        if i != 0 && op == 2 {
-            options[i-1] *= 2
-        }
-    }
-    
-    return zip(scores, options).map { $0 * $1 }.reduce(0, +)
-}
-
 func solution(_ dartResult:String) -> Int {
-    var scoreQueue: [Int] = []
-    var bonusQueue: [String] = []
-    var optionQueue: [Int] = [1, 1, 1]
+    // 숫자 배열
+    let numbers = dartResult
+    .components(separatedBy: ["*", "#"])
+    .joined()
+    .components(separatedBy: ["S", "D", "T"])
+    .filter { $0 != "" }
+    .map { Int($0)! }
     
-    var score = ""
+    // 보너스 배열
+    let bonus = dartResult
+    .components(separatedBy: ["*", "#"])
+    .joined()
+    .components(separatedBy: .decimalDigits)
+    .filter { $0 != "" }
+
+    var options = [1, 1, 1]
     var count = -1
     
-    for (i, c) in dartResult.enumerated() {
+    // 옵션 배열 생성
+    for c in dartResult {
         if c == "S" || c == "D" || c == "T" {
-            bonusQueue.append(String(c))
-            scoreQueue.append(Int(score)!)
-            score = ""
             count += 1
-        }
-        
-        else if c == "*" {
-            optionQueue[count] = 2
-        }
-        
-        else if c == "#" {
-            optionQueue[count] = -1
-        }
-        
-        else {
-            score += String(c)
+        } else if c == "*" {
+            if count != 0 { options[count - 1] *= 2 }
+            options[count] = 2  
+        } else if c == "#" {
+            options[count] = -1
         }
     }
-    
-    var scores: [Int] = []
-    for (s, b) in zip(scoreQueue, bonusQueue) {
-        scores.append(cal(s, b))
-    }
-    return totalScore(scores, optionQueue)
+
+    let scores = zip(numbers, bonus).map { cal($0, $1) }
+    return zip(scores, options).map { $0 * $1 }.reduce(0, +)
 }
