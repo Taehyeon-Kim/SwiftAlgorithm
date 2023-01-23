@@ -37,6 +37,7 @@
 - String repeating - init(repeating:count:)
 - Character
 - ASCII
+- Substring, String.Subsequence(typealias)
 
 ## High ordered functions
 - forEach
