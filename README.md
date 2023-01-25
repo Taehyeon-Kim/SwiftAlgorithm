@@ -14,6 +14,7 @@
 - Binary Search Tree
 
 ## Algorithm
+- Recursion(재귀, 귀납적 사고의 중요성)
 - Brute Force
 - Backtracking
 - Greedy
