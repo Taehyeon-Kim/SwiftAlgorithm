@@ -33,6 +33,8 @@
 - 순열, 조합, 중복 순열, 중복 조합
 
 ## String
+[#14 String을 어떻게 쓰면 잘 썼다고 소문이 날까?](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/14)
+
 - String.Index
 - String to array
 - String repeating - init(repeating:count:)
