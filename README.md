@@ -1,5 +1,8 @@
 # SwiftAlgorithm
 
+## Tips and comment
+- WIP
+
 ## Data Structure
 - Array
 - Set
