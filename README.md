@@ -10,7 +10,7 @@
 - Queue
 - Tree
 - Graph
-- Priority Queue
+- [Priority Queue(Heap)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/32)
 - Binary Search Tree
 
 ## Algorithm
