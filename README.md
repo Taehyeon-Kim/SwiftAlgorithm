@@ -23,8 +23,8 @@
 - Greedy
 - BFS/DFS
 - Dynamic Programming
-- Floyd Warshall
-- Dijkstra
+- [Floyd Warshall](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/28)
+- [Dijkstra](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/33)
 - Sliding Window
 - Two Pointers
 
