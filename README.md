@@ -29,11 +29,13 @@
 - Two Pointers
 
 ## Math
-- GCD, LCM
-- 소수
-- 약수
-- 고급 연산(AND, OR, XOR, NOR, Shifting)
-- 순열, 조합, 중복 순열, 중복 조합
+- GCD(최대 공약수)
+- LCM(최소 공배수)
+- Prime number(소수)
+- Divisor(약수)
+- Advanced Operator(AND, OR, XOR, NOR, Shifting)
+- Permutation
+- [Combination(조합)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issue-1570833263)
 
 ## String
 [#14 String을 어떻게 쓰면 잘 썼다고 소문이 날까?](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/14)
