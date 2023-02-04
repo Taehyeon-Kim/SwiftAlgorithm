@@ -62,13 +62,13 @@ struct Edge: Comparable {
 }
 
 func input() -> (Int, Int, Int, [[(Int, Int)]]) {
-    let ve = readLine()!.split(separator: " ").map { Int(String($0))! }
+    let ve = readLine()!.split(separator: " ").compactMap { Int(String($0)) }
     let (v, e) = (ve[0], ve[1])
     let start = Int(readLine()!)!
     
     var graph = Array(repeating: [(Int,Int)](), count: v+1)
     for _ in 0..<e {
-        let line = readLine()!.split(separator: " ").map { Int(String($0))! }
+        let line = readLine()!.split(separator: " ").compactMap { Int(String($0)) }
         let (from, to, cost) = (line[0], line[1], line[2])
         graph[from].append((to, cost))
     }
