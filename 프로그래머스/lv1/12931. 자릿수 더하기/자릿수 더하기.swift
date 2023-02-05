@@ -1,6 +1,5 @@
 import Foundation
 
-func solution(_ n:Int) -> Int
-{
-    return String(n).map { String($0) }.map { Int($0)! }.reduce(0,+)
+func solution(_ n:Int) -> Int {
+    return String(n).compactMap { Int(String($0)) }.reduce(0,+)
 }
