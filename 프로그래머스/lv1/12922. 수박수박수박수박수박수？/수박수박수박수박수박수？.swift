@@ -1,7 +1,3 @@
 func solution(_ n:Int) -> String {
-    var answer = ""
-    for i in 0..<n {
-        answer += i % 2 == 0 ? "수" : "박"
-    }
-    return answer
+    return (0..<n).map { $0 % 2 == 0 ? "수" : "박" }.joined()
 }
