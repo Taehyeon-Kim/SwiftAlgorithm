@@ -34,7 +34,7 @@
 - Prime number(소수)
 - Divisor(약수)
 - Advanced Operator(AND, OR, XOR, NOR, Shifting)
-- Permutation
+- [Permutation(순열)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issuecomment-1418706418)
 - [Combination(조합)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issue-1570833263)
 
 ## String
