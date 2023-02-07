@@ -17,9 +17,12 @@ func bfs(_ i: Int, _ j: Int) -> Int {
     board[i][j] = 0
     var q = [(i,j)]
     var area = 1
+    var idx = 0
+
+    while q.count > idx {
+        let (curX, curY) = q[idx]
+        idx += 1
         
-    while !q.isEmpty {
-        let (curX, curY) = q.removeFirst()
         for i in 0..<4 {
             let (nx, ny) = (curX + dx[i], curY + dy[i])
             if nx < 0 || nx >= n || ny < 0 || ny >= m { continue }
