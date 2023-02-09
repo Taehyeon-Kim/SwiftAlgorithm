@@ -41,10 +41,10 @@ func solution(_ user_id:[String], _ banned_id:[String]) -> Int {
             if compare(a, b) {
                 count += 1
             }
-            
-            if count == banned_id.count {
-                answer.insert(Set(users))    
-            }
+        }
+        
+        if count == banned_id.count {
+            answer.insert(Set(users))
         }
     }
     
