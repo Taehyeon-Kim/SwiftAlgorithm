@@ -26,35 +26,23 @@ max(d[n-1][1], d[n-1][2], d[n-1][3])
 
 func solution(_ land:[[Int]]) -> Int{
     var answer = 0
-    let (n, m) = (land.count, 4)
-    
+    let n = land.count
     // 2차원 dp table
-    var dp = [[Int]](repeating: [Int](repeating: 0, count: m), count: n)
+    var dp = [[Int]](repeating: [Int](repeating: 0, count: 4), count: n)
     
     // 첫 줄
-    for i in 0..<m {
+    for i in 0..<4 {
         dp[0][i] = land[0][i]
     }
     
     for i in 1..<n {
-        for j in 0..<m {
-            if j == 0 {
-                dp[i][j] = land[i][j] + max(dp[i-1][1], dp[i-1][2], dp[i-1][3])
-            }
-            
-            if j == 1 {
-                dp[i][j] = land[i][j] + max(dp[i-1][0], dp[i-1][2], dp[i-1][3])
-            }
-            
-            if j == 2 {
-                dp[i][j] = land[i][j] + max(dp[i-1][0], dp[i-1][1], dp[i-1][3])
-            }
-            
-            if j == 3 {
-                dp[i][j] = land[i][j] + max(dp[i-1][0], dp[i-1][1], dp[i-1][2])
+        for j in 0..<4 {
+            for k in 0..<4 {
+                if j != k { 
+                    dp[i][j] = max(dp[i][j], land[i][j] + dp[i-1][k])
+                }
             }
         }
     }
-    
     return dp[n-1].max()!
 }
