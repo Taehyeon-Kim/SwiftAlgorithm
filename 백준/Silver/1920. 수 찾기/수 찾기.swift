@@ -30,6 +30,10 @@ func binarySearch(_ array: [Int], _ target: Int) -> Int {
   return 0
 }
 
+let sets = Set(n_num)
 for num in m_num {
-  print(binarySearch(n_num, num))
+  // print(binarySearch(n_num, num))
+
+  // Set으로 푸는게 훨씬 빠를듯
+  print(sets.contains(num) ? 1 : 0)
 }
