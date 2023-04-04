@@ -1,16 +1,48 @@
-let n = Int(readLine()!)! // n개
-var n_num = readLine()!.split(separator: " ").map{Int(String($0))!}
-n_num.sort() // 오름차순 정렬
+import Foundation
 
-// 찾아야 하는 수 배열
-let m = Int(readLine()!)! // m개
-let m_num = readLine()!.split(separator: " ").map{Int(String($0))!}
+let n = Int(readLine()!)!
+var cards = readLine()!.split(separator: " ").map{ Int($0)! }.sorted(by: <)
+cards.append(cards[cards.count - 1] + 1)
+let m = Int(readLine()!)!
+let nums = readLine()!.split(separator: " ").map{ Int($0)! }
 
-var dict = [Int: Int]()
-for num in n_num {
-  dict[num, default: 0] += 1
+func lowerBound(arr: [Int], start: Int, end: Int, target: Int) -> Int {
+    var start = start
+    var end = end
+
+    while end > start {
+        let mid = start + ((end - start) / 2)
+
+        if arr[mid] >= target {
+            end = mid
+        } else {
+            start = mid + 1
+        }
+    }
+
+    return start
 }
 
-for num in m_num {
-  print(dict[num] ?? 0, terminator: " ")
+func upperBound(arr: [Int], start: Int, end: Int, target: Int) -> Int {
+    var start = start
+    var end = end
+
+    while end > start {
+        let mid = start + ((end - start) / 2)
+
+        if arr[mid] > target {
+            end = mid
+        } else {
+            start = mid + 1
+        }
+    }
+
+    return end
+}
+
+for i in 0..<m {
+    let target = nums[i]
+    let up = upperBound(arr: cards, start: 0, end: n, target: target)
+    let low = lowerBound(arr: cards, start: 0, end: n, target: target)
+    print("\(up - low)", terminator: " ")
 }
