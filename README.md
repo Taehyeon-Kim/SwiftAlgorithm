@@ -189,6 +189,16 @@ print(combination([1, 2, 3], 2))
 print(combination(["a","b","c","d"], 3))
 ```
 
+### Radix transformation(진법 변환)
+
+```swift
+Int(string_value: radix: n)! // string_value와 n은 같은 진법을 나타내야 함, string 값을 int 타입으로 변환하는 경우 optional로 반환
+String(value, radix: n) // 이 때 value는 int 타입(10진수)
+```
+
+- Int -> String
+- String -> Int
+
 ## String
 
 - [#14 String을 어떻게 쓰면 잘 썼다고 소문이 날까?](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/14)
