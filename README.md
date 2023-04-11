@@ -84,7 +84,50 @@ lcm([3, 6, 9, 12])  // 36
 lcm([3, 4, 7, 13])  // 1092
 ```
 
-- Prime number(소수)
+### Prime number(소수)
+
+#### 소수 개수
+
+```swift
+let N = 1_000_000
+
+// 에라토스테네스의 체 이용
+// 일반적인 방법으로 진행하면 시간복잡도가 큼
+func countPrimeNumber(_ n:Int) -> Int {
+    var prime = Array(repeating: true, count: N+1)
+    prime[0...1] = [false, false]
+
+    for i in 2...n {
+        if !prime[i] { continue }
+        for j in stride(from: i+i, to: n+1, by: i) {
+            prime[j] = false
+        }
+    }
+
+    return prime[0...n].filter { $0 == true }.count
+}
+
+countPrimeNumber(13)  // 6(2, 3, 5, 7, 11, 13)
+```
+
+#### 소수 판별
+
+```swift
+func isPrime(_ n: Int) -> Bool {
+    for i in stride(from: 2, to: n, by: 1) {
+        if n % i == 0 { return false }
+        if i * i > n { break }  // 절반까지만 체크
+    }
+
+    return n != 1
+}
+
+isPrime(1)
+isPrime(2)
+isPrime(3)
+isPrime(55)
+isPrime(13)
+```
 
 ### Divisor(약수)
 
