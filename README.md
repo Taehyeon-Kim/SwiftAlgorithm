@@ -85,7 +85,18 @@ lcm([3, 4, 7, 13])  // 1092
 ```
 
 - Prime number(소수)
-- Divisor(약수)
+
+### Divisor(약수)
+
+```swift
+func divisor(of num: Int) -> [Int] {
+    return (1...num).filter { num % $0 == 0 }
+}
+
+divisor(of: 12) // 1, 2, 3, 4, 6, 12
+divisor(of: 7)  // 1, 7
+```
+
 - Advanced Operator(AND, OR, XOR, NOR, Shifting)
 - [Permutation(순열)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issuecomment-1418706418)
 - [Combination(조합)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issue-1570833263)
