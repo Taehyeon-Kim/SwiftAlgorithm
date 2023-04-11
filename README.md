@@ -199,6 +199,19 @@ String(value, radix: n) // 이 때 value는 int 타입(10진수)
 - Int -> String
 - String -> Int
 
+### Bit(비트)
+
+```swift
+2.nonzeroBitCount  // 01
+3.nonzeroBitCount  // 11
+65.nonzeroBitCount // 1000001
+69.nonzeroBitCount // 1000101
+```
+
+- Int 타입의 nonzeroBitCount 프로퍼티
+- value의 이진법 표현에서 1의 갯수를 의미하는 프로퍼티
+- 알고 있지 않으면 무소용
+
 ## String
 
 - [#14 String을 어떻게 쓰면 잘 썼다고 소문이 날까?](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/14)
