@@ -140,9 +140,54 @@ divisor(of: 12) // 1, 2, 3, 4, 6, 12
 divisor(of: 7)  // 1, 7
 ```
 
-- Advanced Operator(AND, OR, XOR, NOR, Shifting)
-- [Permutation(순열)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issuecomment-1418706418)
-- [Combination(조합)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issue-1570833263)
+### [Permutation(순열)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issuecomment-1418706418)
+
+```swift
+func permutation<T: Comparable>(_ target: [T], _ n: Int) -> [[T]] {
+  var ret = [[T]]()
+  var visited = Array(repeating: false, count: target.count)
+
+  if target.count < n { return ret }
+
+  func recur(_ arr: [T]) {
+    if arr.count == n { ret.append(arr); return }
+    for i in 0..<target.count {
+      if visited[i] { continue }
+      visited[i] = true
+      recur(arr + [target[i]])
+      visited[i] = false
+    }
+  }
+
+  recur([])
+  return ret
+}
+
+print(permutation([1, 2, 3], 2))
+print(permutation(["a","b","c","d"], 3))
+```
+
+### [Combination(조합)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/35#issue-1570833263)
+
+```swift
+func combination<T: Comparable>(_ target: [T], _ n: Int) -> [[T]] {
+  var ret = [[T]]()
+  if target.count < n { return ret }
+
+  func recur(_ arr: [T], _ idx: Int) {
+    if arr.count == n { ret.append(arr); return }
+    for i in idx..<target.count {
+      recur(arr + [target[i]], i + 1)
+    }
+  }
+
+  recur([], 0)
+  return ret
+}
+
+print(combination([1, 2, 3], 2))
+print(combination(["a","b","c","d"], 3))
+```
 
 ## String
 
