@@ -15,7 +15,86 @@
 - Queue
 - Tree
 - Graph
-- [Priority Queue(Heap)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/32)
+
+### [Heap(힙)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/32)
+
+- peek(min, max value) - O(1)
+- append, pop - O(logN)
+
+```swift
+import Foundation
+
+struct Heap<T: Comparable> {
+    var nodes = [T]()
+    let sort: (T,T) -> Bool
+
+    init(sort: @escaping (T,T) -> Bool) {
+        self.sort = sort
+    }
+
+    var isEmpty: Bool {
+        nodes.isEmpty
+    }
+
+    mutating func append(_ element: T) {
+        var index = nodes.count // 마지막 인덱스
+        nodes.append(element)
+
+        // shift up
+        while index > 0, sort(nodes[index], nodes[(index-1)/2]) {
+            nodes.swapAt(index, (index-1)/2)
+            index = (index-1)/2
+        }
+    }
+
+    mutating func pop() -> T? {
+        if nodes.isEmpty { return nil }
+
+        // 루트 노드 pop
+        let result = nodes.first!
+        nodes.swapAt(0, nodes.count - 1)
+        nodes.popLast()
+
+        var index = 0
+
+        // shift down
+        while index < nodes.count {
+            let left = index * 2 + 1
+            let right = left + 1
+
+            let children = [left, right]
+                .filter { $0 < nodes.count && sort(nodes[$0], nodes[index]) }
+                .sorted { sort(nodes[$0], nodes[$1]) }
+
+            if children.isEmpty { break }
+
+            nodes.swapAt(index, children[0])
+            index = children[0]
+        }
+
+        return result
+    }
+}
+
+extension Heap {
+    init() {
+        self.init(sort: <)
+    }
+}
+
+var heap = Heap<Int>()
+heap.append(4)
+heap.append(2)
+heap.append(3)
+heap.append(1)
+
+heap.pop()
+heap.pop()
+heap.pop()
+heap.pop()
+heap.pop()
+```
+
 - Binary Search Tree
 
 ## Algorithm
