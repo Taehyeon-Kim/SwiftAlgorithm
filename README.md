@@ -119,9 +119,58 @@ heap.pop()
 #### Shortest path problem
 
 - BFS
-- [Dijkstra](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/33)
+### [Dijkstra(다익스트라)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/33)
+
+> 방향 또는 무방향 그래프에서 하나의 시작점으로부터 다른 모든 정점까지의 최단 거리를 구하는 알고리즘  
+> 힙을 이용해서 구현한 다익스트라 알고리즘은 O(ElogE = ElogV)의 시간복잡도를 가짐
+
+- **최소** 힙/우선순위 큐 사용해서 구현
+- 비용(거리)와 정점을 헷갈리지 말기
+- 큐에서 뽑는 원소와 테이블을 비교하는 과정 체크(뽑는 원소의 거리가 테이블에 있는 값과 다르다면 skip)
+
+```swift
+let ve = readLine()!.split(separator: " ").compactMap{Int(String($0))}
+let (v,e) = (ve[0], ve[1])    // 정점 개수(V^2 - 400,000,000), 간선 개수(300,000)
+let start = Int(readLine()!)! // 시작 정점
+
+let inf = Int.max
+var d = [Int](repeating: inf, count: v+1)  // 거리 배열(d, dist, distance)
+var adj = Array(repeating: [(Int,Int)](), count: v+1)
+var q = Heap<Pair>()
+
+// 방향 그래프 u -> (w) -> v
+for _ in 0..<e {
+    let uvw = readLine()!.split(separator: " ").compactMap{Int(String($0))}
+    let (u,v,w) = (uvw[0], uvw[1], uvw[2])
+    adj[u].append((v,w))
+}
+
+// 초기 작업
+d[start] = 0  // 시작점 초기화
+q.push(Pair(d[start], start)) // 시작점 큐에 넣고 시작
+
+// 최단 거리 갱신
+while let cur = q.pop() {
+  if d[cur.v] != cur.d { continue } // 거리가 가장 작은 원소를 큐에서 선택, 그 값이 테이블에 있는 값과 다르면 skip
+
+  // 현재 정점과 인접해 있는 정점들에 대한 거리 갱신
+  for (nxtNode, nxtCost) in adj[cur.v] {
+    if d[nxtNode] <= d[cur.v] + nxtCost { continue }
+
+    // 현재 정점을 거쳐가는 것이 더 작다면 갱신
+    d[nxtNode] = d[cur.v] + nxtCost   // 테이블 갱신
+    q.push(Pair(d[nxtNode], nxtNode)) // 큐에 정점 쌍 추가
+  }
+}
+
+// 거리 테이블 가지고 출력
+for i in stride(from: 1, to: v+1, by: 1) {
+  if d[i] == inf { print("INF")}
+  else { print(d[i]) }
+}
+```
+
 - [Floyd-Warshall(플로이드-워셜)](https://github.com/Taehyeon-Kim/SwiftAlgorithm/issues/28)
-- Bellman-Ford(벨만-포드)
 
 #### MST
 
