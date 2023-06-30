@@ -5,59 +5,50 @@
 1 x x 2 x
 1 1 1 3 3
 */
-// 처음부터 시작했는데 관찰이 어려워 밑에서부터 추적도 시도
-// 위에서 오거나 왼쪽에서 오거나
+// dfs + dp
 
-// 1. map 가지 못하는 길 x 표시
-// 2. bfs
-
-let mn = readLine()!.split(separator: " ").compactMap{Int(String($0))}
+let mn = readLine()!.split{ $0 == " " }.compactMap{Int(String($0))}
 let (m,n) = (mn[0], mn[1])
-
-var map = [[Int]]()
-for _ in 0..<m {
-  let line = readLine()!.split(separator: " ").compactMap{Int(String($0))}
-  map.append(line)
-}
-
-func debugMap(_ arr: [[Int]]) {
-  for i in 0..<m {
-    for j in 0..<n {
-      print(arr[i][j], terminator: " ")
-    }
-    print()
-  }
-}
-
-var dp = [[Int]](repeating: [Int](repeating: -1, count: n), count: m)
 
 let dx = [1,-1,0,0]
 let dy = [0,0,1,-1]
 
+var map = [[Int]]()
+var dp = [[Int]](repeating: [Int](repeating: -1, count: n), count: m)
+
+for _ in 0..<m {
+  let line = readLine()!.split{ $0 == " " }.compactMap{Int(String($0))}
+  map.append(line)
+}
+
 func dfs(_ x: Int, _ y: Int) -> Int {
   // 기저 사례 => 종료 조건
   if x == m-1 && y == n-1 {
+    // 시작점 (0,0)
     return 1
   }
 
+  // 계산 1회만 해주기 위함
   if dp[x][y] == -1 {
+    // 누적 위해 초기화
     dp[x][y] = 0
 
+    // 네방향 계산
     for i in 0..<4 {
       let (nx,ny) = (x+dx[i], y+dy[i])
 
-      if !((0..<m) ~= nx && (0..<n) ~= ny) {
-        continue
-      }
+      guard (0..<m) ~= nx, (0..<n) ~= ny else { continue }
 
+      // 내리막길인 경우에만 경로 수 갱신
+      // 경로 없다면 위에서 0으로 초기화 해주었으니까 0
       if map[x][y] > map[nx][ny] {
         dp[x][y] += dfs(nx, ny)
       }
     }
   }
 
+  // 값 있는 경우 dp 값 사용
   return dp[x][y]
 }
 
-let ans = dfs(0,0)
-print(ans)
+print(dfs(0,0))
