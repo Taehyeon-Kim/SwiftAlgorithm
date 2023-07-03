@@ -1,71 +1,37 @@
 // 경우의 수 문제 -> 조합 혹은 순열
 // 모든 경우를 찾아서 풀 수 있는가 -> n이 최대 20
 // 팀 절반만 찾으면 되니까 20개 중에 10개 뽑는 경우의 수
-
-/*
-visited
-mx <- 0
-func dfs(idx, arr)
-  if arr.count == n/2
-    mx = max(mx, calculate(arr))
-    return
-
-  for i in idx..<n
-    if visited[i] { continue }
-
-    visited[i] = true
-    if !visited[i]
-      dfs(i, arr + [i])
-    visited[i] = false
-
-for i in 0..<n/2
-  dfs(i, [])
-*/
+// 그냥 모든 경우 탐색 -> 이진 트리로 구성 -> n이 20이니까 2^20승 = 약 100만
 
 let n = Int(readLine()!)!
-var board = [[Int]]()
+let m = n/2
+var arr = [[Int]]()
 for _ in 0..<n {
   let input = readLine()!.split{$0==" "}.compactMap{Int(String($0))}
-  board.append(input)
+  arr.append(input)
 }
 
-var mn = Int.max
-var visited = [Bool](repeating: false, count: n)
-func calculate(_ arr: [Int]) -> Int {
-  let one = arr
-  let other = (0..<n).filter{!arr.contains($0)}
-
-  var oneSum = 0
-  for i in one {
-    for j in one {
-      if i == j { continue }
-      oneSum += board[i][j]
+var ans = Int.max
+func dfs(_ idx: Int, _ alist: [Int], _ blist: [Int]) {
+  // 종료 조건
+  if idx == n {
+    if alist.count == blist.count {
+      var (asum, bsum) = (0, 0)
+      for i in 0..<m {
+        for j in 0..<m {
+          asum += arr[alist[i]][alist[j]]
+          bsum += arr[blist[i]][blist[j]]
+        }
+      }
+      ans = min(ans, abs(asum - bsum))
     }
+    return
   }
 
-  var otherSum = 0
-  for i in other {
-    for j in other {
-      if i == j { continue }
-      otherSum += board[i][j]
-    }
-  }
-
-  return abs(oneSum - otherSum)
+  // 이진 트리로 구성 -> 각 사람이 a팀에 속할지, b팀에 속할지 2가지 경우로 나뉨
+  dfs(idx+1, alist+[idx], blist)
+  dfs(idx+1, alist, blist+[idx])
 }
 
-func dfs(_ idx: Int, _ arr: [Int]) {
-  if arr.count == n/2 {
-    mn = min(mn, calculate(arr))
-  }
-
-  for i in idx..<n {
-    if visited[i] { continue }
-    visited[i] = true
-    dfs(i, arr+[i])
-    visited[i] = false
-  }
-}
-
-dfs(0, [])
-print(mn)
+dfs(0,[],[])
+print(ans)
