@@ -4,25 +4,22 @@ import Foundation
 // 빼야 하는 개수 -> 남은 게 적은 것부터 제거하면 됨
 
 func solution(_ k:Int, _ tangerine:[Int]) -> Int {
-    var removeCnt = tangerine.count - k
-    var dict = [Int: Int]()
-    for t in tangerine {
-        dict[t, default: 0] += 1
-    }
+    var remove = tangerine.count - k
+    let dict = Dictionary(grouping: tangerine) { $0 }
+      .map { ($0.key, $0.value.count) }
+      .sorted { $0.1 < $1.1 }
 
     var ans = dict.count
-    let sortedDict = dict.sorted { $0.value < $1.value }
-    
-    for (key, value) in sortedDict {
-        if removeCnt <= 0 { break }
-        
-        if value <= removeCnt {
-            removeCnt -= value
-            ans -= 1
-        } else {
-            break
-        }
+    for (_, value) in dict {
+      if remove == 0 { break }
+
+      if value <= remove {
+        remove -= value
+        ans -= 1
+      }
+
+      else { break }
     }
-    
+
     return ans
 }
