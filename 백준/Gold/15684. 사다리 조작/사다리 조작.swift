@@ -42,13 +42,13 @@ func go(_ cnt: Int, _ x: Int, _ y: Int) {
     if cur > n-1 { continue }
 
     for j in stride(from: cur, to: n-1, by: 1) {
-      // 연속 체크
-      if !v[i][j] && !v[i][j+1] { 
-        if j > 0 && v[i][j-1] { continue }
-        v[i][j] = true
-        go(cnt + 1, i, j+2)
-        v[i][j] = false
-      }
+      // 이미 놓여있으면 현재 사다리 가로로 못 놓음
+      if j > 0 && v[i][j-1] { continue }
+      if v[i][j] || v[i][j+1] { continue }
+
+      v[i][j] = true
+      go(cnt + 1, i, j+2)
+      v[i][j] = false
     }
   }
 }
